@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kridati Sports Foundation – Concept | Manage | Execute</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #f03020;
+    --red-dark: #c4200f;
+    --red-pale: #fff0ee;
+    --charcoal: #1a1a1a;
+    --mid: #555;
+    --light-gray: #f6f6f6;
+    --border: #e5e5e5;
+    --white: #ffffff;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--charcoal); overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: var(--charcoal);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5vw; height: 70px;
+    border-bottom: 3px solid var(--red);
+  }
+  .nav-logo-img { height: 42px; width: auto; border-radius: 3px; }
+  .nav-links { display: flex; gap: 26px; list-style: none; align-items: center; }
+  .nav-links a { color: rgba(255,255,255,0.72); text-decoration: none; font-size: 0.87rem; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--white); }
+  .nav-cta { background: var(--red) !important; color: var(--white) !important; padding: 9px 22px; border-radius: 3px; font-weight: 600 !important; }
+  .nav-cta:hover { background: var(--red-dark) !important; color: var(--white) !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(155deg, rgba(26,26,26,0.96) 0%, rgba(26,26,26,0.80) 50%, rgba(192,32,15,0.72) 100%),
+      url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=1600&q=80') center/cover no-repeat;
+    display: flex; align-items: center;
+    padding: 110px 5vw 80px;
+    position: relative; overflow: hidden;
+  }
+  .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 80px; background: linear-gradient(to bottom, transparent, var(--white)); }
+  .hero::before {
+    content: 'KRIDATI'; position: absolute; right: -10px; bottom: 60px;
+    font-family: 'Playfair Display', serif; font-size: 14rem; font-weight: 900;
+    color: rgba(240,48,32,0.06); line-height: 1; pointer-events: none; user-select: none;
+  }
+  .hero-inner { max-width: 680px; position: relative; z-index: 1; }
+  .hero-tag {
+    display: inline-block; background: var(--red); color: var(--white);
+    font-family: 'Space Mono', monospace; font-size: 0.68rem; letter-spacing: 2px;
+    padding: 5px 14px; border-radius: 2px; margin-bottom: 14px; text-transform: uppercase;
+  }
+  .hero-sub { font-family: 'Space Mono', monospace; font-size: 0.75rem; letter-spacing: 3.5px; color: rgba(255,255,255,0.45); text-transform: uppercase; margin-bottom: 20px; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.6rem, 5.5vw, 4.2rem); font-weight: 900; line-height: 1.1; color: var(--white); margin-bottom: 22px; }
+  .hero h1 em { color: var(--red); font-style: normal; }
+  .hero p { font-size: 1.03rem; line-height: 1.82; color: rgba(255,255,255,0.80); max-width: 560px; margin-bottom: 38px; }
+  .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-primary { background: var(--red); color: var(--white); padding: 13px 30px; border-radius: 3px; font-weight: 600; font-size: 0.93rem; text-decoration: none; display: inline-block; transition: background 0.2s, transform 0.2s; border: 2px solid var(--red); cursor: pointer; font-family: 'DM Sans', sans-serif; }
+  .btn-primary:hover { background: var(--red-dark); border-color: var(--red-dark); transform: translateY(-2px); }
+  .btn-outline { background: transparent; color: var(--white); padding: 13px 30px; border-radius: 3px; font-weight: 600; font-size: 0.93rem; text-decoration: none; display: inline-block; border: 2px solid rgba(255,255,255,0.38); transition: border-color 0.2s, transform 0.2s; }
+  .btn-outline:hover { border-color: var(--white); transform: translateY(-2px); }
+  .hero-stats { display: flex; gap: 40px; margin-top: 52px; padding-top: 36px; border-top: 1px solid rgba(255,255,255,0.1); flex-wrap: wrap; }
+  .stat { color: var(--white); }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 2.1rem; font-weight: 900; color: var(--red); line-height: 1; }
+  .stat-label { font-size: 0.72rem; opacity: 0.55; margin-top: 5px; line-height: 1.4; }
+
+  /* TAGLINE STRIP */
+  .tagline-strip { background: var(--red); padding: 16px 5vw; display: flex; align-items: center; justify-content: center; gap: 28px; overflow: hidden; flex-wrap: wrap; }
+  .tagline-strip span { font-family: 'Space Mono', monospace; font-size: 0.72rem; letter-spacing: 3.5px; color: rgba(255,255,255,0.88); text-transform: uppercase; white-space: nowrap; }
+  .tagline-strip .dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,0.38); flex-shrink: 0; }
+
+  /* SECTION BASE */
+  section { padding: 88px 5vw; }
+  .section-tag { font-family: 'Space Mono', monospace; font-size: 0.68rem; letter-spacing: 3px; color: var(--red); text-transform: uppercase; margin-bottom: 12px; display: block; }
+  h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3.5vw, 2.7rem); font-weight: 700; line-height: 1.15; color: var(--charcoal); margin-bottom: 16px; }
+  .lead { font-size: 0.98rem; line-height: 1.85; color: var(--mid); max-width: 680px; margin-bottom: 48px; }
+
+  /* MISSION */
+  .mission-strip { background: var(--charcoal); display: grid; grid-template-columns: 1fr 1fr 1fr; }
+  .mission-item { padding: 48px 38px; border-right: 1px solid rgba(255,255,255,0.07); position: relative; overflow: hidden; transition: background 0.3s; }
+  .mission-item:last-child { border-right: none; }
+  .mission-item:hover { background: rgba(240,48,32,0.07); }
+  .mission-item::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--red); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
+  .mission-item:hover::before { transform: scaleX(1); }
+  .mission-icon { font-size: 2rem; margin-bottom: 14px; display: block; }
+  .mission-item h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--white); margin-bottom: 12px; }
+  .mission-item p { color: rgba(255,255,255,0.58); font-size: 0.87rem; line-height: 1.75; }
+
+  /* ABOUT */
+  .about-bg { background: var(--light-gray); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; max-width: 1200px; margin: 0 auto; }
+  .about-img-wrap { position: relative; }
+  .about-img-main { width: 100%; height: 420px; border-radius: 3px; overflow: hidden; }
+  .about-img-main img { width: 100%; height: 100%; object-fit: cover; }
+  .about-badge { position: absolute; bottom: -18px; right: -18px; background: var(--red); color: var(--white); padding: 18px 22px; text-align: center; box-shadow: 0 8px 32px rgba(240,48,32,0.38); }
+  .about-badge-num { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; line-height: 1; }
+  .about-badge-text { font-size: 0.7rem; margin-top: 4px; opacity: 0.9; }
+  .about-text blockquote { border-left: 4px solid var(--red); padding-left: 20px; margin: 22px 0; font-family: 'Playfair Display', serif; font-size: 1.06rem; font-style: italic; color: var(--charcoal); line-height: 1.7; }
+  .about-list { list-style: none; margin-top: 22px; }
+  .about-list li { padding: 11px 0; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 12px; font-size: 0.88rem; color: var(--mid); }
+  .about-list li:last-child { border-bottom: none; }
+  .about-list li::before { content: ''; width: 8px; height: 8px; background: var(--red); flex-shrink: 0; border-radius: 1px; }
+
+  /* PROGRAMS */
+  .programs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1200px; margin: 0 auto; }
+  .program-card { background: var(--white); border-radius: 3px; border: 1.5px solid var(--border); overflow: hidden; transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s; }
+  .program-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.09); border-color: var(--red); }
+  .program-top { height: 4px; background: var(--red); }
+  .program-body { padding: 28px 24px; }
+  .program-icon { font-size: 1.9rem; margin-bottom: 13px; display: block; }
+  .program-body h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--charcoal); margin-bottom: 10px; }
+  .program-body p { font-size: 0.86rem; line-height: 1.75; color: var(--mid); margin-bottom: 16px; }
+  .program-tag { display: inline-block; background: var(--red-pale); color: var(--red); font-size: 0.68rem; font-weight: 700; padding: 4px 10px; border-radius: 20px; letter-spacing: 0.5px; font-family: 'Space Mono', monospace; }
+
+  /* KHELO INDIA */
+  .khelo { background: var(--charcoal); }
+  .khelo .section-tag { color: rgba(240,48,32,0.88); }
+  .khelo h2 { color: var(--white); }
+  .khelo .lead { color: rgba(255,255,255,0.58); }
+  .khelo-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 56px; align-items: start; max-width: 1200px; margin: 0 auto; }
+  .khelo-points { display: flex; flex-direction: column; gap: 14px; }
+  .khelo-point { display: flex; gap: 18px; align-items: flex-start; padding: 20px 22px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-left: 3px solid var(--red); border-radius: 3px; transition: background 0.2s; }
+  .khelo-point:hover { background: rgba(255,255,255,0.07); }
+  .kp-num { font-family: 'Space Mono', monospace; font-size: 1.3rem; font-weight: 700; color: var(--red); line-height: 1; min-width: 34px; }
+  .kp-text h4 { color: var(--white); margin-bottom: 6px; font-size: 0.93rem; font-weight: 600; }
+  .kp-text p { color: rgba(255,255,255,0.52); font-size: 0.83rem; line-height: 1.65; }
+  .khelo-sidebar { background: var(--red); border-radius: 3px; padding: 30px; }
+  .khelo-sidebar h3 { font-family: 'Playfair Display', serif; color: var(--white); font-size: 1.1rem; margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.22); }
+  .scheme-list { list-style: none; }
+  .scheme-list li { padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.13); color: rgba(255,255,255,0.86); font-size: 0.84rem; display: flex; align-items: center; gap: 10px; }
+  .scheme-list li::before { content: '→'; color: rgba(255,255,255,0.48); }
+  .scheme-list li:last-child { border-bottom: none; }
+
+  /* TIMELINE */
+  .timeline-bg { background: var(--light-gray); }
+  .timeline-wrap { max-width: 880px; margin: 0 auto; }
+  .phase { display: grid; grid-template-columns: 108px 1fr; gap: 32px; margin-bottom: 32px; position: relative; }
+  .phase::after { content: ''; position: absolute; left: 51px; top: 54px; bottom: -32px; width: 2px; background: var(--border); }
+  .phase:last-child::after { display: none; }
+  .phase-marker { display: flex; flex-direction: column; align-items: center; }
+  .phase-circle { width: 50px; height: 50px; border-radius: 50%; background: var(--red); color: var(--white); display: flex; align-items: center; justify-content: center; font-family: 'Space Mono', monospace; font-weight: 700; font-size: 0.76rem; border: 4px solid var(--white); box-shadow: 0 0 0 2px var(--red); flex-shrink: 0; }
+  .phase-circle.dark { background: var(--charcoal); box-shadow: 0 0 0 2px var(--charcoal); }
+  .phase-time { font-size: 0.67rem; color: var(--mid); margin-top: 8px; text-align: center; line-height: 1.4; }
+  .phase-content { background: var(--white); border-radius: 3px; padding: 26px 30px; border: 1.5px solid var(--border); }
+  .phase-content h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--charcoal); margin-bottom: 14px; }
+  .phase-content ul { list-style: none; }
+  .phase-content ul li { padding: 7px 0; font-size: 0.86rem; color: var(--mid); border-bottom: 1px solid #f2f2f2; display: flex; gap: 11px; align-items: flex-start; line-height: 1.5; }
+  .phase-content ul li:last-of-type { border-bottom: none; }
+  .phase-content ul li::before { content: '▸'; color: var(--red); font-size: 0.65rem; margin-top: 4px; flex-shrink: 0; }
+  .phase-budget { display: inline-block; margin-top: 16px; background: var(--red-pale); color: var(--red); font-family: 'Space Mono', monospace; font-size: 0.74rem; padding: 6px 14px; border-radius: 20px; font-weight: 700; border: 1px solid rgba(240,48,32,0.2); }
+
+  /* IMPACT */
+  .impact-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; max-width: 1100px; margin: 0 auto; }
+  .impact-card { background: var(--white); padding: 34px 18px; text-align: center; border-radius: 3px; border: 1.5px solid var(--border); transition: border-color 0.2s, transform 0.2s; }
+  .impact-card:hover { border-color: var(--red); transform: translateY(-4px); }
+  .impact-num { font-family: 'Playfair Display', serif; font-size: 2.6rem; font-weight: 900; color: var(--red); line-height: 1; }
+  .impact-card p { font-size: 0.82rem; color: var(--mid); margin-top: 10px; line-height: 1.55; }
+
+  /* GET INVOLVED */
+  .involved-bg { background: var(--light-gray); }
+  .involved-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; max-width: 1100px; margin: 0 auto; }
+  .involved-card { background: var(--white); border: 1.5px solid var(--border); border-radius: 3px; padding: 34px 26px; position: relative; overflow: hidden; transition: border-color 0.25s, transform 0.25s; }
+  .involved-card:hover { border-color: var(--red); transform: translateY(-4px); }
+  .involved-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--red); }
+  .involved-icon { font-size: 2.2rem; margin-bottom: 16px; display: block; }
+  .involved-card h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; margin-bottom: 11px; color: var(--charcoal); }
+  .involved-card p { font-size: 0.86rem; color: var(--mid); line-height: 1.75; margin-bottom: 22px; }
+
+  /* DONATE */
+  .donate-section { background: var(--red); text-align: center; padding: 96px 5vw; position: relative; overflow: hidden; }
+  .donate-section::before { content: '₹'; position: absolute; left: -20px; top: 50%; transform: translateY(-50%); font-family: 'Playfair Display', serif; font-size: 28rem; font-weight: 900; color: rgba(0,0,0,0.06); line-height: 1; pointer-events: none; }
+  .donate-section .section-tag { color: rgba(255,255,255,0.65); }
+  .donate-section h2 { color: var(--white); }
+  .donate-section > p { color: rgba(255,255,255,0.82); max-width: 540px; margin: 14px auto 38px; line-height: 1.82; }
+  .donate-amounts { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 34px; }
+  .amount-chip { background: rgba(255,255,255,0.14); color: var(--white); padding: 11px 26px; border-radius: 30px; font-family: 'Space Mono', monospace; font-weight: 700; font-size: 0.88rem; border: 1.5px solid rgba(255,255,255,0.28); cursor: pointer; transition: background 0.2s, border-color 0.2s; user-select: none; }
+  .amount-chip:hover, .amount-chip.active { background: var(--white); color: var(--red); border-color: var(--white); }
+  .btn-donate { background: var(--white); color: var(--red); padding: 14px 46px; border-radius: 3px; font-weight: 700; font-size: 1rem; text-decoration: none; display: inline-block; transition: transform 0.2s, box-shadow 0.2s; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+  .btn-donate:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.14); }
+  .donate-note { color: rgba(255,255,255,0.5); font-size: 0.76rem; margin-top: 16px; font-family: 'Space Mono', monospace; letter-spacing: 0.5px; }
+
+  /* CONTACT */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 72px; max-width: 1100px; margin: 0 auto; }
+  .contact-info > p { color: var(--mid); font-size: 0.9rem; line-height: 1.82; margin-bottom: 30px; }
+  .contact-detail { display: flex; gap: 14px; margin-bottom: 20px; align-items: flex-start; }
+  .cd-icon { width: 40px; height: 40px; background: var(--red-pale); border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; border: 1px solid rgba(240,48,32,0.14); }
+  .cd-text strong { display: block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--red); margin-bottom: 3px; font-family: 'Space Mono', monospace; }
+  .cd-text span { font-size: 0.87rem; color: var(--mid); line-height: 1.55; display: block; }
+  .contact-form-wrap { background: var(--white); border: 1.5px solid var(--border); border-radius: 3px; padding: 34px; }
+  .contact-form-wrap h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 22px; color: var(--charcoal); }
+  .contact-form { display: flex; flex-direction: column; gap: 13px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
+  .contact-form input, .contact-form select, .contact-form textarea { width: 100%; padding: 12px 15px; border: 1.5px solid var(--border); border-radius: 3px; font-family: 'DM Sans', sans-serif; font-size: 0.87rem; color: var(--charcoal); background: var(--white); transition: border-color 0.2s; outline: none; appearance: none; }
+  .contact-form input:focus, .contact-form select:focus, .contact-form textarea:focus { border-color: var(--red); }
+  .contact-form textarea { resize: vertical; min-height: 118px; }
+
+  /* FOOTER */
+  footer { background: #111; color: rgba(255,255,255,0.5); padding: 62px 5vw 26px; }
+  .footer-top { display: grid; grid-template-columns: 1.8fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 46px; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 26px; }
+  .footer-logo { height: 46px; width: auto; margin-bottom: 14px; display: block; }
+  .footer-brand > p { font-size: 0.83rem; line-height: 1.75; color: rgba(255,255,255,0.42); }
+  .footer-socials { display: flex; gap: 10px; margin-top: 18px; }
+  .social-btn { width: 34px; height: 34px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 3px; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 0.82rem; transition: background 0.2s; }
+  .social-btn:hover { background: var(--red); }
+  .footer-col h4 { color: var(--white); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px; font-family: 'Space Mono', monospace; }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 9px; }
+  .footer-col ul li a { color: rgba(255,255,255,0.42); text-decoration: none; font-size: 0.84rem; transition: color 0.2s; }
+  .footer-col ul li a:hover { color: var(--red); }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; font-size: 0.74rem; flex-wrap: wrap; gap: 12px; }
+  .footer-reg { display: flex; gap: 8px; flex-wrap: wrap; }
+  .reg-badge { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.36); font-family: 'Space Mono', monospace; font-size: 0.58rem; padding: 4px 9px; border-radius: 2px; letter-spacing: 1px; }
+
+  /* ANIMATIONS */
+  .fade-up { opacity: 0; transform: translateY(26px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  .d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.2s; } .d3 { transition-delay: 0.3s; }
+
+  @media (max-width: 1000px) {
+    .about-grid, .khelo-grid, .contact-grid { grid-template-columns: 1fr; gap: 44px; }
+    .mission-strip { grid-template-columns: 1fr; }
+    .mission-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .mission-item:last-child { border-bottom: none; }
+  }
+  @media (max-width: 780px) {
+    .programs-grid, .impact-grid, .involved-grid { grid-template-columns: 1fr 1fr; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 520px) {
+    .programs-grid, .impact-grid, .involved-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#home" style="text-decoration:none">
+    <img src="KRIDATI_SPORTS.png" alt="Kridati Sports Foundation" class="nav-logo-img" />
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#programs">Programs</a></li>
+    <li><a href="#khelo">Khelo India</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#get-involved">Get Involved</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#donate" class="nav-cta">Donate</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <span class="hero-tag">Sec. 8 Non-Profit · Mumbai, India</span>
+    <p class="hero-sub">Concept | Manage | Execute</p>
+    <h1>Sport Is a <em>Right,</em><br>Not a Privilege.</h1>
+    <p>Kridati Sports Foundation bridges the gap between grassroots potential and structured opportunity — delivering community programs, Khelo India training camps, and talent pathways for India's next generation.</p>
+    <div class="hero-btns">
+      <a href="#programs" class="btn-primary">Explore Our Programs</a>
+      <a href="#donate" class="btn-outline">Support the Mission</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">3+</div><div class="stat-label">Cities<br>Year One</div></div>
+      <div class="stat"><div class="stat-num">500+</div><div class="stat-label">Athletes<br>to Train</div></div>
+      <div class="stat"><div class="stat-num">6</div><div class="stat-label">Olympic<br>Sports</div></div>
+      <div class="stat"><div class="stat-num">80G</div><div class="stat-label">Tax Exempt<br>Donations</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="tagline-strip">
+  <span>Concept</span><div class="dot"></div>
+  <span>Manage</span><div class="dot"></div>
+  <span>Execute</span><div class="dot"></div>
+  <span>Khelo India Aligned</span><div class="dot"></div>
+  <span>SAI Empanelled</span><div class="dot"></div>
+  <span>CSR Eligible</span><div class="dot"></div>
+  <span>Sec. 8 Registered</span>
+</div>
+
+<div class="mission-strip">
+  <div class="mission-item fade-up">
+    <span class="mission-icon">🏃</span>
+    <h3>Our Mission</h3>
+    <p>Empower communities through structured sports events and training that promote health, discipline, and opportunity for every young Indian — regardless of economic background.</p>
+  </div>
+  <div class="mission-item fade-up d1">
+    <span class="mission-icon">🏆</span>
+    <h3>Our Vision</h3>
+    <p>To be India's leading non-profit platform for grassroots Olympic sports management — bridging government funding, community delivery, and elite athlete development seamlessly.</p>
+  </div>
+  <div class="mission-item fade-up d2">
+    <span class="mission-icon">🎯</span>
+    <h3>Our Approach</h3>
+    <p>End-to-end execution of government tenders, school leagues, corporate events, and talent identification camps — fully compliant with SAI, Khelo India, and NSDC frameworks.</p>
+  </div>
+</div>
+
+<section id="about" class="about-bg">
+  <div class="about-grid">
+    <div class="about-img-wrap fade-up">
+      <div class="about-img-main">
+        <img src="https://images.unsplash.com/photo-1571019613576-2b22c76fd955?w=800&q=80" alt="Youth sports training" />
+      </div>
+      <div class="about-badge">
+        <div class="about-badge-num">2025</div>
+        <div class="about-badge-text">Founded in<br>Mumbai</div>
+      </div>
+    </div>
+    <div class="about-text fade-up d1">
+      <span class="section-tag">Who We Are</span>
+      <h2>Building the Infrastructure India's Youth Deserve</h2>
+      <blockquote>"India allocates thousands of crores to sports — but millions of children never feel its impact. We exist to close that gap."</blockquote>
+      <p style="font-size:0.91rem;color:var(--mid);line-height:1.84;margin-bottom:18px">Kridati Sports Foundation is a Section 8 registered non-profit headquartered in Mumbai. We were founded with one conviction: the gap between government sports fund allocation and real, on-ground execution is a solvable problem — and we are the team to solve it.</p>
+      <p style="font-size:0.91rem;color:var(--mid);line-height:1.84;margin-bottom:22px">We partner with schools, municipalities, sports federations, and corporate CSR programs to deliver end-to-end sports programming — starting with Football and Badminton, expanding into the full Olympic sports ecosystem.</p>
+      <ul class="about-list">
+        <li>Registered under Section 8 of the Companies Act, 2013</li>
+        <li>Empanelled under Sports Authority of India (SAI) framework</li>
+        <li>Aligned with Khelo India program delivery guidelines</li>
+        <li>CSR eligible under Schedule VII of the Companies Act</li>
+        <li>12A &amp; 80G registration in progress for tax-exempt donations</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="programs">
+  <span class="section-tag">What We Do</span>
+  <h2>Programs That Create Real Change</h2>
+  <p class="lead">From grassroots community tournaments to elite talent identification camps — every Kridati program delivers measurable outcomes for athletes, communities, and funders.</p>
+  <div class="programs-grid">
+    <div class="program-card fade-up"><div class="program-top"></div><div class="program-body"><span class="program-icon">⚽</span><h3>Community Tournaments</h3><p>3–5 community-level Football and Badminton tournaments in partnership with local schools and municipal venues. Full end-to-end execution — fixtures, referees, medals, and media coverage included.</p><span class="program-tag">Football · Badminton</span></div></div>
+    <div class="program-card fade-up d1"><div class="program-top"></div><div class="program-body"><span class="program-icon">🏫</span><h3>Inter-School & College Leagues</h3><p>Seasonal structured leagues building habitual sports participation, institutional partnerships, and a visible athlete pipeline from the ground up across Maharashtra.</p><span class="program-tag">Seasonal · Leagues</span></div></div>
+    <div class="program-card fade-up d2"><div class="program-top"></div><div class="program-body"><span class="program-icon">🇮🇳</span><h3>Khelo India Training Camps</h3><p>5–7 day intensive training camps for Olympic disciplines including Athletics, Badminton, Football, Judo, Boxing, and Wrestling — aligned with Khelo India standards, led by certified coaches.</p><span class="program-tag">Govt. Aligned · Olympic Sports</span></div></div>
+    <div class="program-card fade-up"><div class="program-top"></div><div class="program-body"><span class="program-icon">🔍</span><h3>Kridati Talent Hunt</h3><p>Structured scouting events to identify promising athletes aged 8–18. Shortlisted athletes are connected to SAI academies, state sports bodies, and private coaching institutions through formal referral pathways.</p><span class="program-tag">Talent ID · SAI Referral</span></div></div>
+    <div class="program-card fade-up d1"><div class="program-top"></div><div class="program-body"><span class="program-icon">🏢</span><h3>Corporate Sports Events</h3><p>Customized sports event packages for corporate HR teams — team leagues, wellness tournaments, and annual sports days. Revenue generated cross-subsidizes underprivileged community programs.</p><span class="program-tag">CSR · HR Wellness</span></div></div>
+    <div class="program-card fade-up d2"><div class="program-top"></div><div class="program-body"><span class="program-icon">👨‍🏫</span><h3>Coach Development & Clinics</h3><p>Paid coaching clinics and skill workshops (₹300–₹500/participant) generating self-sustaining revenue while building a certified freelance coach ecosystem across Maharashtra.</p><span class="program-tag">Certifications · Clinics</span></div></div>
+  </div>
+</section>
+
+<section id="khelo" class="khelo">
+  <div class="khelo-grid">
+    <div>
+      <span class="section-tag">Government Partnership</span>
+      <h2>Our Khelo India Execution Model</h2>
+      <p class="lead">India's Khelo India program allocates hundreds of crores annually for grassroots sports. Kridati is purpose-built to bid for and execute these tenders — ensuring funds reach athletes, not just paperwork.</p>
+      <div class="khelo-points fade-up">
+        <div class="khelo-point"><div class="kp-num">01</div><div class="kp-text"><h4>Tender Identification & Bidding</h4><p>We systematically track Khelo India, SAI, and state sports tenders. Our team prepares compliant technical bids — coach CVs, venue tie-ups, equipment inventories, and full execution plans.</p></div></div>
+        <div class="khelo-point"><div class="kp-num">02</div><div class="kp-text"><h4>Ground-Level Execution</h4><p>Unlike intermediaries who subcontract poorly, Kridati directly manages the event infrastructure — certified coaches, rented venues, equipment procurement, and day-to-day coordination.</p></div></div>
+        <div class="khelo-point"><div class="kp-num">03</div><div class="kp-text"><h4>Compliance & Reporting</h4><p>We submit utilization certificates, attendance records, coach logs, and participant impact reports within government timelines — ensuring clean audits and repeat tender eligibility.</p></div></div>
+        <div class="khelo-point"><div class="kp-num">04</div><div class="kp-text"><h4>State-Level Expansion</h4><p>Beachhead in Maharashtra, expanding to Haryana, Rajasthan, and UP. We build local government relationships through field research and district sports office engagement in each state.</p></div></div>
+      </div>
+    </div>
+    <div class="fade-up d1">
+      <div class="khelo-sidebar">
+        <h3>Government Schemes We Execute Under</h3>
+        <ul class="scheme-list">
+          <li>Khelo India Youth Games (KIYG)</li>
+          <li>Khelo India University Games (KIUG)</li>
+          <li>Khelo India Winter Games</li>
+          <li>SAI Training Centre (STC) Programs</li>
+          <li>National Sports Development Fund (NSDF)</li>
+          <li>State Sports Schemes — Maharashtra &amp; Haryana</li>
+          <li>MYAS Annual Calendar Events</li>
+          <li>District &amp; Zonal Sports Office Tenders</li>
+          <li>CSR Sports Programs (Schedule VII)</li>
+          <li>School Games Federation of India (SGFI)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="roadmap" class="timeline-bg">
+  <div style="max-width:880px;margin:0 auto">
+    <span class="section-tag">Our Journey</span>
+    <h2>Three-Year Execution Roadmap</h2>
+    <p class="lead">A phased, capital-efficient plan from pilot to pan-India grassroots platform.</p>
+    <div class="timeline-wrap">
+      <div class="phase fade-up">
+        <div class="phase-marker"><div class="phase-circle">P1</div><div class="phase-time">Months<br>0 – 6</div></div>
+        <div class="phase-content">
+          <h3>Phase 1 — Foundation &amp; Pilot (Mumbai / Thane)</h3>
+          <ul>
+            <li>Complete Section 8 registration, SAI empanelment, and 12A/80G tax exemption filings</li>
+            <li>Conduct 3–5 community Football &amp; Badminton tournaments in Thane and Kalyan districts</li>
+            <li>Onboard 8–10 freelance certified coaches on project-based contracts</li>
+            <li>Build school partnership network — target 15 schools in Thane / Mumbai region</li>
+            <li>Launch social media presence and Kridati brand identity across platforms</li>
+            <li>Submit first Khelo India district-level tender in Maharashtra</li>
+          </ul>
+          <span class="phase-budget">Budget: ₹5–6 Lakhs · CSR + Local Sponsors</span>
+        </div>
+      </div>
+      <div class="phase fade-up d1">
+        <div class="phase-marker"><div class="phase-circle dark">P2</div><div class="phase-time">Months<br>6 – 18</div></div>
+        <div class="phase-content">
+          <h3>Phase 2 — Corporate Expansion &amp; Khelo India Entry</h3>
+          <ul>
+            <li>Launch corporate sports event packages; target 5 corporate clients in Mumbai MMR</li>
+            <li>Organize seasonal inter-school leagues — Football, Badminton, Athletics</li>
+            <li>Win and execute first Khelo India state-level training camp tender</li>
+            <li>Establish Haryana operations — field research, district sports office meetings, partnerships</li>
+            <li>Expand coach network to 25+ certified coaches across Maharashtra and Haryana</li>
+            <li>Launch Kridati Talent Hunt (first edition) — refer 20+ athletes to SAI academies</li>
+          </ul>
+          <span class="phase-budget">Budget: ₹15–25 Lakhs · Tender Revenue + Corporate Fees + Grants</span>
+        </div>
+      </div>
+      <div class="phase fade-up d2">
+        <div class="phase-marker"><div class="phase-circle">P3</div><div class="phase-time">Months<br>18 – 36</div></div>
+        <div class="phase-content">
+          <h3>Phase 3 — Olympic Sports Integration &amp; Multi-State Scale</h3>
+          <ul>
+            <li>Launch 5-day intensive camps for 4+ Olympic disciplines: Athletics, Judo, Boxing, Wrestling</li>
+            <li>Host annual Kridati Multi-Sport Grassroots Olympics Festival (flagship event)</li>
+            <li>Expand to Pune, Navi Mumbai, and Haryana zonal hubs with local partners</li>
+            <li>Achieve operational self-sufficiency via tender revenue, corporate fees, and CSR income</li>
+            <li>Lay groundwork for Kridati Olympic Academy — full-time athlete training with school partners</li>
+          </ul>
+          <span class="phase-budget">Budget: ₹50–80 Lakhs · Multi-Stream · Investor-Backed</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div style="text-align:center;margin-bottom:52px">
+    <span class="section-tag">Projected Impact</span>
+    <h2>Numbers That Matter</h2>
+  </div>
+  <div class="impact-grid">
+    <div class="impact-card fade-up"><div class="impact-num">500+</div><p>Athletes directly trained in Year 1 across Football, Badminton and Athletics</p></div>
+    <div class="impact-card fade-up d1"><div class="impact-num">15+</div><p>School partnerships established across Thane, Kalyan and Mumbai districts</p></div>
+    <div class="impact-card fade-up d2"><div class="impact-num">₹5Cr</div><p>Government tender value targeted for execution in the first 18 months</p></div>
+    <div class="impact-card fade-up d3"><div class="impact-num">50+</div><p>Athletes referred to SAI academies and state sports bodies by Year 2</p></div>
+  </div>
+</section>
+
+<section id="get-involved" class="involved-bg">
+  <span class="section-tag">Join the Movement</span>
+  <h2>How You Can Be Part of This</h2>
+  <p class="lead">Whether you're a corporation, a coach, a school, or an individual who believes sport is a right — there's a meaningful role for you at Kridati.</p>
+  <div class="involved-grid">
+    <div class="involved-card fade-up"><span class="involved-icon">🏦</span><h3>Corporate CSR Partners</h3><p>Channel your Schedule VII CSR funds into verified, impact-measurable sports programs. We provide complete documentation, utilization certificates, and annual impact reports for your CSR compliance.</p><a href="#contact" class="btn-primary" style="font-size:0.84rem;padding:10px 20px;display:inline-block">Partner With Us</a></div>
+    <div class="involved-card fade-up d1"><span class="involved-icon">👨‍🏫</span><h3>Coaches &amp; Sports Professionals</h3><p>Join our freelance coach network. Get paid per event, access media exposure, build your portfolio, earn certification support, and be part of India's most structured grassroots sports execution team.</p><a href="#contact" class="btn-primary" style="font-size:0.84rem;padding:10px 20px;display:inline-block">Apply as a Coach</a></div>
+    <div class="involved-card fade-up d2"><span class="involved-icon">🏫</span><h3>Schools &amp; Institutions</h3><p>Bring structured sports leagues, Khelo India camps, and talent identification to your students — at minimal or zero cost through our grant-funded program delivery model.</p><a href="#contact" class="btn-primary" style="font-size:0.84rem;padding:10px 20px;display:inline-block">Become a Partner School</a></div>
+  </div>
+</section>
+
+<section class="donate-section" id="donate">
+  <span class="section-tag">Support Our Work</span>
+  <h2>Every Rupee Puts a Child on the Field</h2>
+  <p>Donations to Kridati Sports Foundation are eligible for 80G tax exemption. Your contribution directly funds equipment, coaching, venue costs, and travel support for underprivileged athletes.</p>
+  <div class="donate-amounts">
+    <div class="amount-chip">₹500</div>
+    <div class="amount-chip active">₹2,000</div>
+    <div class="amount-chip">₹5,000</div>
+    <div class="amount-chip">₹10,000</div>
+    <div class="amount-chip">Custom</div>
+  </div>
+  <a href="#contact" class="btn-donate">Donate Now</a>
+  <p class="donate-note">80G Tax Exemption Certificate Issued · UPI / Bank Transfer / Cheque Accepted</p>
+</section>
+
+<section id="contact">
+  <div class="contact-grid">
+    <div class="contact-info fade-up">
+      <span class="section-tag">Reach Out</span>
+      <h2>Let's Build Something Together</h2>
+      <p>Whether you're a potential partner, donor, coach, or parent of a young athlete — we'd love to hear from you.</p>
+      <div class="contact-detail"><div class="cd-icon">📍</div><div class="cd-text"><strong>Registered Office</strong><span>Mumbai, Maharashtra, India</span><span>Operational Hub: Thane / Kalyan District</span></div></div>
+      <div class="contact-detail"><div class="cd-icon">📧</div><div class="cd-text"><strong>Email</strong><span>info@kridatisports.org</span><span>partnerships@kridatisports.org</span></div></div>
+      <div class="contact-detail"><div class="cd-icon">📞</div><div class="cd-text"><strong>Phone / WhatsApp</strong><span>+91 XXXXX XXXXX</span></div></div>
+      <div class="contact-detail"><div class="cd-icon">🏛️</div><div class="cd-text"><strong>Legal Status</strong><span>Section 8 Company · CIN: [To be updated]</span><span>12A &amp; 80G Registration In Progress</span></div></div>
+    </div>
+    <div class="fade-up d1">
+      <div class="contact-form-wrap">
+        <h3>Send Us a Message</h3>
+        <form class="contact-form">
+          <div class="form-row">
+            <input type="text" placeholder="Your Name" />
+            <input type="email" placeholder="Email Address" />
+          </div>
+          <select><option value="">I am a... (select one)</option><option>CSR / Corporate Partner</option><option>Sports Coach</option><option>School / Institution</option><option>Parent / Athlete</option><option>Donor / Supporter</option><option>Government / Media</option></select>
+          <input type="text" placeholder="Subject" />
+          <textarea placeholder="Tell us how we can work together..."></textarea>
+          <button type="submit" class="btn-primary" style="width:100%;text-align:center;border:none">Send Message →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <img src="KRIDATI_SPORTS.png" alt="Kridati Sports Foundation" class="footer-logo" />
+      <p style="font-family:'Space Mono',monospace;font-size:0.62rem;letter-spacing:2px;color:rgba(255,255,255,0.3);margin-bottom:12px;text-transform:uppercase">Concept | Manage | Execute</p>
+      <p>A Section 8 non-profit dedicated to bridging the gap between India's sports funding and grassroots execution — one community, one athlete at a time.</p>
+      <div class="footer-socials">
+        <a href="#" class="social-btn">📘</a>
+        <a href="#" class="social-btn">📸</a>
+        <a href="#" class="social-btn">💼</a>
+        <a href="#" class="social-btn">🐦</a>
+      </div>
+    </div>
+    <div class="footer-col"><h4>Programs</h4><ul><li><a href="#">Community Tournaments</a></li><li><a href="#">School Leagues</a></li><li><a href="#">Khelo India Camps</a></li><li><a href="#">Talent Hunt</a></li><li><a href="#">Corporate Events</a></li><li><a href="#">Coach Clinics</a></li></ul></div>
+    <div class="footer-col"><h4>Get Involved</h4><ul><li><a href="#">Donate</a></li><li><a href="#">CSR Partnership</a></li><li><a href="#">Volunteer</a></li><li><a href="#">Coach with Us</a></li><li><a href="#">Partner Schools</a></li><li><a href="#">Sponsor an Event</a></li></ul></div>
+    <div class="footer-col"><h4>Organisation</h4><ul><li><a href="#">About Us</a></li><li><a href="#">Our Team</a></li><li><a href="#">Governance</a></li><li><a href="#">Annual Reports</a></li><li><a href="#">Press &amp; Media</a></li><li><a href="#">Contact</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Kridati Sports Foundation. All rights reserved.</span>
+    <div class="footer-reg">
+      <span class="reg-badge">SEC. 8 NGO</span>
+      <span class="reg-badge">80G ELIGIBLE</span>
+      <span class="reg-badge">SAI ALIGNED</span>
+      <span class="reg-badge">KHELO INDIA</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.08 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+  document.querySelectorAll('.amount-chip').forEach(chip => {
+    chip.addEventListener('click', () => { document.querySelectorAll('.amount-chip').forEach(c => c.classList.remove('active')); chip.classList.add('active'); });
+  });
+</script>
+</body>
+</html>
